@@ -28,7 +28,8 @@ async def get_session():
     try:
         yield session
         await session.commit()
-    except:
+    except Exception:
         await session.rollback()
+        raise
     finally:
         await session.close()
